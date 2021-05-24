@@ -1,17 +1,22 @@
 const htm = window.htm
-const { createElement, useRef, useState } = window.React
+const { createElement, useRef, useState, Suspense, lazy } = window.React
 const { render } = window.ReactDOM
+const { HashRouter, Route, Switch, Redirect } = window.ReactRouterDOM
 const styled = window.styled
-const marked = window.marked
 
 const html = htm.bind(createElement)
 
 export {
     html,
     styled,
-    marked,
     render,
+    lazy,
     useRef,
     useState,
+    HashRouter,
+    Suspense,
+    Route,
+    Redirect,
+    Switch,
     createElement,
 }
