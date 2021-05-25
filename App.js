@@ -1,62 +1,49 @@
 import { html, styled, HashRouter as Router, Route, Switch, Suspense, Redirect, lazy } from './modules.js'
 
 const Container = styled.div`
+  position: relative;
+  box-sizing: border-box;
   height: 100vh;
 `
 
-const Content = styled.div`
-  box-sizing: border-box;
-  height: calc(100vh - 60px);
-`
-
-const Footer = styled.div`
-  box-sizing: border-box;
-  height: 60px;
-  padding: 16px;
+const CenterBox = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-around;
-`
-
-const NavButton = styled.span`
-  min-width: 60px;
-  text-align: center;
-  cursor: pointer;
+  height: 100%;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
 `
 
 const loading = html`
-    <div>Loading...</div>
+    <${CenterBox}>Loading...</CenterBox>
 `
 
 const Message = lazy(() => import('./Message.js'))
+const Contacts = lazy(() => import('./Contacts.js'))
 
 export default function App(props) {
 
     return html`
         <${Container}>
-            <${Content}>
-                <${Router}>
-                    <${Suspense} fallback=${loading}>
-                        <${Switch}>
-                            <${Route} path="/" exact>
-                                <${Redirect} to="/message" />
-                            </Route>
-                            <${Route} path="/message">
-                                <${Message} />
-                            </Route>
-                            <${Route} path="*">
-                                <div>No match route</div>
-                            </Route>
-                        </Switch>
-                    </Suspense>
-                </Router>
-            </Content>
-            <${Footer}>
-                <${NavButton}>消息</NavButton>
-                <${NavButton}>联系人</NavButton>
-                <${NavButton}>发现</NavButton>
-                <${NavButton}>我</NavButton>
-            </Footer>
+            <${Router}>
+                <${Suspense} fallback=${loading}>
+                    <${Switch}>
+                        <${Route} path="/" exact>
+                            <${Redirect} to="/message" />
+                        </Route>
+                        <${Route} path="/message">
+                            <${Message} />
+                        </Route>
+                        <${Route} path="/contacts">
+                            <${Contacts} />
+                        </Route>
+                        <${Route} path="*">
+                            <div>No match route</div>
+                        </Route>
+                    </Switch>
+                </Suspense>
+            </Router>
         </Container>
     `
 }

@@ -1,24 +1,26 @@
-import { html, styled } from './modules.js'
-import { chats } from './chats.js'
+import { html, styled, useState } from './modules.js'
+import { chats } from './data/chats.js'
 
 const Header = styled.div`
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
   height: 56px;
+  padding: 0 10px;
   border-bottom: 1px solid #f5f6fa;
-  padding: 12px;
   font-size: 20px;
 `
 
 const Body = styled.div`
-  height: calc(100% - 50px);
+  height: calc(100% - 56px);
   overflow: auto;
 `
 
-const ChatItem = styled.div`
+const Chat = styled.div`
   display: flex;
   box-sizing: border-box;
   height: 60px;
-  padding: 10px;
+  padding: 5px 10px;
   border: none;
   background-color: unset;
   cursor: pointer;
@@ -39,19 +41,46 @@ const ChatDescription = styled.div`
   padding: 4px 10px;
 `
 
+const MenuIcon = styled.img`
+  margin-left: 8px;
+  height: 22px;
+`
+
+const HeaderTitle = styled.span`
+  margin-left: 24px;
+`
+
+const Sidebar = styled.div`
+  position: absolute;
+  width: ${props => props.visible ? '80%' : '0'};
+  transition: width 1s;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+`
+
 export default function Message(props) {
+
+    const [showMenu, setShowMenu] = useState(false)
+
+    function toggleMenu() {
+        setShowMenu(showMenu => !showMenu)
+    }
+
     return html`
         <${Header}>
-            诡秘之主
+            <${MenuIcon} onClick=${toggleMenu} src="./images/menu.svg" alt="" />
+            <${HeaderTitle}>诡秘之主</HeaderTitle>
         </Header>
         <${Body}>
         ${chats.map(it => html`
-            <${ChatItem}>
+            <${Chat}>
                 <${Avatar} src=${it.avatar} alt="" />
                 <${ChatDescription}>
                     ${it.title}
                 </ChatDescription>
-            </ChatItem>
+            </Chat>
         `)}
         </Body>
     `
