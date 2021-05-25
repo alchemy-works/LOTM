@@ -1,3 +1,7 @@
+function randomColor() {
+    return (Math.random() * 0xffffff << 0).toString(16)
+}
+
 export const chats = [
     { title: '塔罗会', },
     { title: '救赎蔷薇', },
@@ -13,4 +17,9 @@ export const chats = [
     { title: '心理炼金会', },
     { title: '要素黎明', },
     { title: '魔女教派', },
-]
+].map(it => {
+    return {
+        ...it,
+        avatar: 'https://api.prodless.com/avatar.png?color=' + randomColor()
+    }
+})
