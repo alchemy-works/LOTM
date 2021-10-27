@@ -19,7 +19,7 @@ const loading = html`
     <${CenterBox}>Loading...</CenterBox>
 `
 
-const Message = lazy(() => import('./Message.js'))
+const Message = lazy(() => import('./Messages.js'))
 const Contacts = lazy(() => import('./Contacts.js'))
 
 export default function App(props) {
@@ -30,9 +30,9 @@ export default function App(props) {
                 <${Suspense} fallback=${loading}>
                     <${Switch}>
                         <${Route} path="/" exact>
-                            <${Redirect} to="/message" />
+                            <${Redirect} to="/messages" />
                         </Route>
-                        <${Route} path="/message">
+                        <${Route} path="/messages">
                             <${Message} />
                         </Route>
                         <${Route} path="/contacts">

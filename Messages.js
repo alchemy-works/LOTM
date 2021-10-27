@@ -60,12 +60,16 @@ const Sidebar = styled.div`
   background-color: #fff;
 `
 
-export default function Message(props) {
+export default function Messages(props) {
 
     const [showMenu, setShowMenu] = useState(false)
 
     function toggleMenu() {
         setShowMenu(showMenu => !showMenu)
+    }
+
+    function handleOnLoad() {
+
     }
 
     return html`
@@ -76,7 +80,7 @@ export default function Message(props) {
         <${Body}>
         ${chats.map(it => html`
             <${Chat}>
-                <${Avatar} src=${it.avatar} alt="" />
+                <${Avatar} onLoad=${handleOnLoad} src=${it.avatar} alt="" />
                 <${ChatDescription}>
                     ${it.title}
                 </ChatDescription>

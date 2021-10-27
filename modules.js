@@ -1,22 +1,7 @@
-const htm = window.htm
-const { createElement, useRef, useState, Suspense, lazy } = window.React
-const { render } = window.ReactDOM
-const { HashRouter, Route, Switch, Redirect } = window.ReactRouterDOM
-const styled = window.styled
+export const { createElement, useRef, useState, Suspense, lazy } = window['React']
+export const { render } = window['ReactDOM']
+export const { HashRouter, Route, Switch, Redirect } = window['ReactRouterDOM']
+export const styled = window['styled']
 
-const html = htm.bind(createElement)
-
-export {
-    html,
-    styled,
-    render,
-    lazy,
-    useRef,
-    useState,
-    HashRouter,
-    Suspense,
-    Route,
-    Redirect,
-    Switch,
-    createElement,
-}
+const htm = window['htm']
+export const html = htm.bind(createElement)
